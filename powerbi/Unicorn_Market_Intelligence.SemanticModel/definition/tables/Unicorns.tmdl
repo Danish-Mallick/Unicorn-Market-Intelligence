@@ -1,0 +1,148 @@
+table Unicorns
+	lineageTag: 3be054be-8587-44e7-8790-27793e4477fb
+
+	column Company_ID
+		dataType: int64
+		lineageTag: 708706fb-ab29-4188-92a4-de91f1d77da0
+		summarizeBy: none
+		sourceColumn: Company_ID
+
+	column Company
+		dataType: string
+		lineageTag: 58d7a058-e002-405d-9f2f-afdaa7c8e6f4
+		summarizeBy: none
+		sourceColumn: Company
+
+	column City
+		dataType: string
+		lineageTag: 5b9f4420-f02f-4547-a956-5ad0745d620e
+		summarizeBy: none
+		sourceColumn: City
+
+	column Country
+		dataType: string
+		lineageTag: 0c57a222-29d7-4c54-9cde-0dc2925a0b2b
+		summarizeBy: none
+		sourceColumn: Country
+
+	column Continent
+		dataType: string
+		lineageTag: c718249b-b008-4347-b87b-eb430aa8f7b9
+		summarizeBy: none
+		sourceColumn: Continent
+
+	column Industry
+		dataType: string
+		lineageTag: 5ae28f76-f011-43fd-ab84-123366831ecc
+		summarizeBy: none
+		sourceColumn: Industry
+
+	column Date_Joined
+		dataType: dateTime
+		lineageTag: 84fa2b4a-d629-49f1-bc80-f5fe33619b42
+		summarizeBy: sum
+		sourceColumn: Date_Joined
+
+	column Year_Joined
+		dataType: int64
+		lineageTag: 1f00aa3e-190d-494f-8da5-fc0dc5e2ea82
+		summarizeBy: none
+		sourceColumn: Year_Joined
+
+	column Year_Founded
+		dataType: int64
+		lineageTag: ffb698c6-b320-439d-9565-6a5213d32d11
+		summarizeBy: none
+		sourceColumn: Year_Founded
+
+	column Valuation_USD
+		dataType: int64
+		lineageTag: c3f0dcd2-1cdc-4bd3-8015-4b5836118779
+		summarizeBy: sum
+		sourceColumn: Valuation_USD
+
+	column Funding_USD
+		dataType: int64
+		lineageTag: e8e91d49-97cf-4115-b6a8-768642224a2c
+		summarizeBy: sum
+		sourceColumn: Funding_USD
+
+	column Valuation_Billions
+		dataType: double
+		lineageTag: 90d648af-6700-4c51-a785-96664fa23d51
+		summarizeBy: sum
+		sourceColumn: Valuation_Billions
+
+	column Time_To_Unicorn
+		dataType: int64
+		lineageTag: db1424ee-dbd8-4edf-81b2-29b1c1f4bcf6
+		summarizeBy: none
+		sourceColumn: Time_To_Unicorn
+
+	measure 'Company Count' = DISTINCTCOUNT(Unicorns[Company_ID])
+		lineageTag: 9b17cabc-1041-4fd5-957f-a9c93fac943d
+		formatString: #,0
+
+	measure 'New Unicorns 2019-21' = CALCULATE([Company Count], KEEPFILTERS(Unicorns[Year_Joined] >= 2019), KEEPFILTERS(Unicorns[Year_Joined] <= 2021))
+		lineageTag: 5a850fce-9b5b-4f82-8958-4a6eafdd8b4b
+		formatString: #,0
+
+	measure 'Top Three New Unicorns' = CALCULATE([New Unicorns 2019-21], KEEPFILTERS(Unicorns[Industry] IN {"Fintech", "Internet software & services", "E-commerce & direct-to-consumer"}))
+		lineageTag: a4b35e8e-6fb4-4374-a42d-1d87b4aba2e6
+		formatString: #,0
+
+	measure 'Top Three Share' = DIVIDE([Top Three New Unicorns], [New Unicorns 2019-21])
+		lineageTag: 464106c0-7ce6-4eeb-89f4-469f3b4fb8a0
+		formatString: 0.0%
+
+	measure 'Avg Snapshot Valuation ($B)' = AVERAGE(Unicorns[Valuation_Billions])
+		lineageTag: 1ec112d5-101d-41f8-8481-f7c7efccebf1
+		formatString: #,0.00
+
+	measure 'Avg Top Three Snapshot Valuation ($B)' = CALCULATE([Avg Snapshot Valuation ($B)], KEEPFILTERS(Unicorns[Industry] IN {"Fintech", "Internet software & services", "E-commerce & direct-to-consumer"}), KEEPFILTERS(Unicorns[Year_Joined] >= 2019), KEEPFILTERS(Unicorns[Year_Joined] <= 2021))
+		lineageTag: 7a932974-445d-4c46-ab53-5304c5ba6e0c
+		formatString: #,0.00
+
+	measure 'Total Historical Snapshot Valuation ($B)' = SUM(Unicorns[Valuation_Billions])
+		lineageTag: e043c939-271f-4112-bd1b-e48d8aeb4063
+		formatString: #,0.00
+
+	measure 'Avg Years To Unicorn' = AVERAGEX(FILTER(Unicorns, Unicorns[Time_To_Unicorn] >= 0), Unicorns[Time_To_Unicorn])
+		lineageTag: 380bcaf4-45d2-4238-b602-235193dff96e
+		formatString: #,0.00
+
+	partition Unicorns = m
+		mode: import
+		source =
+				let
+				    Base = "https://raw.githubusercontent.com/ShaikhBorhanUddin/Unicorn_Company_Analysis/main/Dataset/",
+				    SourceCSV = (filename as text) as table =>
+				        Table.PromoteHeaders(
+				            Csv.Document(Web.Contents(Base & filename),
+				                [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				            [PromoteAllScalars=true]),
+				    Companies = Table.TransformColumnTypes(SourceCSV("companies.csv"),
+				        {{"company_id", Int64.Type}, {"company", type text}, {"city", type text}, {"country", type text}, {"continent", type text}}),
+				    Dates = Table.TransformColumnTypes(SourceCSV("dates.csv"),
+				        {{"company_id", Int64.Type}, {"date_joined", type text}, {"year_founded", Int64.Type}}),
+				    Funding = Table.TransformColumnTypes(SourceCSV("funding.csv"),
+				        {{"company_id", Int64.Type}, {"valuation", Int64.Type}, {"funding", Int64.Type}, {"select_investors", type text}}),
+				    Industries = Table.TransformColumnTypes(SourceCSV("industries.csv"),
+				        {{"company_id", Int64.Type}, {"industry", type text}}),
+				    JoinDates = Table.NestedJoin(Companies, {"company_id"}, Dates, {"company_id"}, "d", JoinKind.Inner),
+				    ExpandDates = Table.ExpandTableColumn(JoinDates, "d", {"date_joined", "year_founded"}),
+				    JoinFunding = Table.NestedJoin(ExpandDates, {"company_id"}, Funding, {"company_id"}, "f", JoinKind.Inner),
+				    ExpandFunding = Table.ExpandTableColumn(JoinFunding, "f", {"valuation", "funding"}),
+				    JoinIndustry = Table.NestedJoin(ExpandFunding, {"company_id"}, Industries, {"company_id"}, "i", JoinKind.Inner),
+				    ExpandIndustry = Table.ExpandTableColumn(JoinIndustry, "i", {"industry"}),
+				    CleanIndustry = Table.TransformColumns(ExpandIndustry, {{"industry", each Text.Replace(_, Character.FromNumber(34), ""), type text}}),
+				    AddDate = Table.AddColumn(CleanIndustry, "Date_Joined", each Date.FromText([date_joined], [Format="dd/MM/yyyy", Culture="en-GB"]), type date),
+				    AddYear = Table.AddColumn(AddDate, "Year_Joined", each Date.Year([Date_Joined]), Int64.Type),
+				    AddBillions = Table.AddColumn(AddYear, "Valuation_Billions", each [valuation] / 1000000000, type number),
+				    AddTenure = Table.AddColumn(AddBillions, "Time_To_Unicorn", each [Year_Joined] - [year_founded], Int64.Type),
+				    Rename = Table.RenameColumns(AddTenure, {{"company_id","Company_ID"},{"company","Company"},{"city","City"},{"country","Country"},{"continent","Continent"},{"industry","Industry"},{"year_founded","Year_Founded"},{"valuation","Valuation_USD"},{"funding","Funding_USD"}}),
+				    Final = Table.SelectColumns(Rename, {"Company_ID","Company","City","Country","Continent","Industry","Date_Joined","Year_Joined","Year_Founded","Valuation_USD","Funding_USD","Valuation_Billions","Time_To_Unicorn"})
+				in
+				    Final
+
+	annotation PBI_ResultType = Table

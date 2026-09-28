@@ -1,0 +1,23 @@
+-- Company Count
+Company Count = DISTINCTCOUNT(Unicorns[Company_ID])
+
+-- New Unicorns 2019-21
+New Unicorns 2019-21 = CALCULATE([Company Count], KEEPFILTERS(Unicorns[Year_Joined] >= 2019), KEEPFILTERS(Unicorns[Year_Joined] <= 2021))
+
+-- Top Three New Unicorns
+Top Three New Unicorns = CALCULATE([New Unicorns 2019-21], KEEPFILTERS(Unicorns[Industry] IN {"Fintech", "Internet software & services", "E-commerce & direct-to-consumer"}))
+
+-- Top Three Share
+Top Three Share = DIVIDE([Top Three New Unicorns], [New Unicorns 2019-21])
+
+-- Avg Snapshot Valuation ($B)
+Avg Snapshot Valuation ($B) = AVERAGE(Unicorns[Valuation_Billions])
+
+-- Avg Top Three Snapshot Valuation ($B)
+Avg Top Three Snapshot Valuation ($B) = CALCULATE([Avg Snapshot Valuation ($B)], KEEPFILTERS(Unicorns[Industry] IN {"Fintech", "Internet software & services", "E-commerce & direct-to-consumer"}), KEEPFILTERS(Unicorns[Year_Joined] >= 2019), KEEPFILTERS(Unicorns[Year_Joined] <= 2021))
+
+-- Total Historical Snapshot Valuation ($B)
+Total Historical Snapshot Valuation ($B) = SUM(Unicorns[Valuation_Billions])
+
+-- Avg Years To Unicorn
+Avg Years To Unicorn = AVERAGEX(FILTER(Unicorns, Unicorns[Time_To_Unicorn] >= 0), Unicorns[Time_To_Unicorn])
