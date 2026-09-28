@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Unicorn Market Intelligence"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c7f04511-0144-40a0-883f-47d1db8aaa8d"
+  }
+}
