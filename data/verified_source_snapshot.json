@@ -1,0 +1,44 @@
+{
+  "snapshot_note": "Verified by reading all four 1,074-row public CSV tables. Historical approximately-2022 unicorn data; not a 2026 market snapshot.",
+  "source": "https://github.com/ShaikhBorhanUddin/Unicorn_Company_Analysis/tree/main/Dataset",
+  "upstream_reference": "https://mavenanalytics.io/data-playground/unicorn-companies",
+  "full_dataset_company_count": 1074,
+  "scope_years": [2019, 2020, 2021],
+  "scope_count": 732,
+  "scope_valuation_billions": 2048,
+  "top3_scope_count": 400,
+  "top3_scope_valuation_billions": 1190,
+  "year_counts_all_sectors": {"2019": 104, "2020": 108, "2021": 520},
+  "top3_by_industry_year": [
+    {"industry":"Fintech", "year":2021, "num_unicorns":138, "average_valuation_billions":2.75},
+    {"industry":"Internet software & services", "year":2021, "num_unicorns":119, "average_valuation_billions":2.15},
+    {"industry":"E-commerce & direct-to-consumer", "year":2021, "num_unicorns":47, "average_valuation_billions":2.47},
+    {"industry":"Internet software & services", "year":2020, "num_unicorns":20, "average_valuation_billions":4.35},
+    {"industry":"E-commerce & direct-to-consumer", "year":2020, "num_unicorns":16, "average_valuation_billions":4.00},
+    {"industry":"Fintech", "year":2020, "num_unicorns":15, "average_valuation_billions":4.33},
+    {"industry":"Fintech", "year":2019, "num_unicorns":20, "average_valuation_billions":6.80},
+    {"industry":"Internet software & services", "year":2019, "num_unicorns":13, "average_valuation_billions":4.23},
+    {"industry":"E-commerce & direct-to-consumer", "year":2019, "num_unicorns":12, "average_valuation_billions":2.58}
+  ],
+  "top_industries_full_snapshot": [
+    ["Fintech",224,882],["Internet software & services",205,595],["E-commerce & direct-to-consumer",111,426],
+    ["Artificial intelligence",84,377],["Health",74,198],["Other",58,252],
+    ["Supply chain, logistics, & delivery",57,177],["Cybersecurity",50,129],
+    ["Data management & analytics",41,136],["Mobile & telecommunications",38,89]
+  ],
+  "top_countries_scope": [
+    ["United States",413,1163],["China",79,167],["India",47,125],["United Kingdom",26,118],
+    ["Germany",20,51],["Canada",16,46],["Israel",16,34],["France",16,40],
+    ["Brazil",13,34],["Singapore",12,21]
+  ],
+  "year_top3_aggregates": [[2019,104,45,4.93],[2020,108,51,4.24],[2021,520,304,2.47]],
+  "quality_flags_full_snapshot": {"missing_city":16,"zero_reported_funding":13,"founded_after_unicorn_date":1},
+  "largest_company_valuations_historical": [
+    ["Bytedance",180,"Artificial intelligence","China"],
+    ["SHEIN",100,"E-commerce & direct-to-consumer","China"],
+    ["SpaceX",100,"Other","United States"],
+    ["Stripe",95,"Fintech","United States"],
+    ["Klarna",46,"Fintech","Sweden"],
+    ["Checkout.com",40,"Fintech","United Kingdom"]
+  ]
+}

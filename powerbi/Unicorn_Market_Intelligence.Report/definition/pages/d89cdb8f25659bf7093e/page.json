@@ -1,0 +1,51 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "d89cdb8f25659bf7093e",
+  "displayName": "Unicorn Growth Overview",
+  "displayOption": "FitToPage",
+  "width": 1440,
+  "height": 850,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#0B1223'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspace": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#0B1223'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

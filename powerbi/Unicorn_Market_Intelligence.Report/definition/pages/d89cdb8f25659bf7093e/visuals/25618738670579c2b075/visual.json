@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "25618738670579c2b075",
+  "position": {
+    "x": 1095,
+    "y": 177,
+    "width": 290,
+    "height": 25,
+    "z": 1010,
+    "tabOrder": 1010
+  },
+  "visual": {
+    "visualType": "textbox",
+    "drillFilterOtherVisuals": false,
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "AVG SNAPSHOT VALUE ($B)",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "10pt",
+                      "fontWeight": "bold",
+                      "color": "#A0B0CF"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "left"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

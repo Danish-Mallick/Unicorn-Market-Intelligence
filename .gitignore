@@ -1,0 +1,8 @@
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+*.pyc
+.DS_Store
+# Source downloads are accessible via scripts/download_source.py.
+# Deliberately do not upload raw third-party data without checking reuse terms.
+data/raw/

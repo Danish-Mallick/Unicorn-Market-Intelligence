@@ -1,0 +1,40 @@
+{
+  "name": "UnicornNoir",
+  "dataColors": [
+    "#FA7DAC",
+    "#5BDECE",
+    "#FFC77B",
+    "#8D9BFA",
+    "#6C7A9D"
+  ],
+  "foreground": "#F7F8FF",
+  "foregroundNeutralSecondary": "#A0B0CF",
+  "background": "#0B1223",
+  "backgroundLight": "#192840",
+  "tableAccent": "#FA7DAC",
+  "good": "#5BDECE",
+  "neutral": "#FFC77B",
+  "bad": "#ED6080",
+  "textClasses": {
+    "callout": {
+      "fontSize": 28,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#F7F8FF"
+    },
+    "title": {
+      "fontSize": 12,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#F7F8FF"
+    },
+    "header": {
+      "fontSize": 12,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#F7F8FF"
+    },
+    "label": {
+      "fontSize": 11,
+      "fontFace": "Segoe UI",
+      "color": "#A0B0CF"
+    }
+  }
+}

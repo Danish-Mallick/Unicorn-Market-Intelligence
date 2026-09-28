@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "2dde20bc868318047efd",
+  "position": {
+    "x": 42,
+    "y": 46,
+    "width": 1280,
+    "height": 57,
+    "z": 1002,
+    "tabOrder": 1002
+  },
+  "visual": {
+    "visualType": "textbox",
+    "drillFilterOtherVisuals": false,
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Where did the unicorn boom take shape?",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "29pt",
+                      "fontWeight": "bold",
+                      "color": "#F7F8FF"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "left"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

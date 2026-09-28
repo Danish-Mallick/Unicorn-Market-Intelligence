@@ -1,0 +1,84 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "1ee7af5d8fb9cb520f52",
+  "position": {
+    "x": 1095,
+    "y": 203,
+    "width": 317,
+    "height": 99,
+    "z": 1011,
+    "tabOrder": 1011
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Unicorns"
+                    }
+                  },
+                  "Property": "Avg Top Three Snapshot Valuation ($B)"
+                }
+              },
+              "queryRef": "Unicorns.Avg Top Three Snapshot Valuation ($B)",
+              "nativeQueryRef": "Avg Top Three Snapshot Valuation ($B)"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#192840'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
